@@ -2,29 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import {ChildComponent} from '../child/child.component';
 
 // tslint:disable-next-line:typedef
-export function TestDouble() {
+export function TestDoublee() {
   return (OriginalComponent: any) => {
 
+    /*
     console.dir(OriginalComponent);
 
-
-    setTimeout(() => {
-
-      console.log(OriginalComponent.ɵcmp);
-    }, 5000);
-
-
-    /*
     Object.defineProperty(OriginalComponent, 'ɵfac', {
       get(): any {
         return () => {
-          console.log("#ɵfac");
-            return new OriginalComponent();
+          console.log('#ɵfac');
+          return new OriginalComponent();
         };
       },
-      set(_: any) {}
     });
      */
+
 
 
     /*
@@ -49,12 +42,12 @@ export function TestDouble() {
   };
 }
 
+@TestDoublee()
 @Component({
   selector: 'app-parent',
   templateUrl: './parent.component.html',
   styleUrls: ['./parent.component.scss']
 })
-@TestDouble()
 export class ParentComponent implements OnInit {
 
   constructor() { }
