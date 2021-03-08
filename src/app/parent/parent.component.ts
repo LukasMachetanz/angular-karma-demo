@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ChildComponent} from '../child/child.component';
 
 // tslint:disable-next-line:typedef
@@ -42,17 +42,20 @@ export function TestDoublee() {
   };
 }
 
-@TestDoublee()
 @Component({
   selector: 'app-parent',
   templateUrl: './parent.component.html',
   styleUrls: ['./parent.component.scss']
 })
-export class ParentComponent implements OnInit {
+@TestDoublee()
+export class ParentComponent {
+  @ViewChild(ChildComponent)
+  public childComponent: ChildComponent | undefined;
 
   constructor() { }
 
-  ngOnInit(): void {
+  public lol(): void {
+    this.childComponent?.greetMe();
   }
 
 }
