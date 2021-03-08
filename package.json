@@ -5,9 +5,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "test": "ng test --plugin @ttransformer/angular",
+    "setup": "npm i @ttransformer/angular @ttransformer/core"
   },
   "private": true,
   "dependencies": {
@@ -19,12 +20,15 @@
     "@angular/platform-browser": "~11.1.1",
     "@angular/platform-browser-dynamic": "~11.1.1",
     "@angular/router": "~11.1.1",
+    "@ttransformer/angular": "^0.2.22",
+    "@ttransformer/core": "^0.2.22",
+    "ngx-build-plus": "^11.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1101.2",
+    "@angular-devkit/build-angular": "~0.1100.1",
     "@angular/cli": "~11.1.2",
     "@angular/compiler-cli": "~11.1.1",
     "@types/jasmine": "~3.6.0",
