@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ParentComponent } from './parent.component';
-import {ttransform, Ttransformer} from '@ttransformer/core';
+import {ttransform, Ttransformer } from '@ttransformer/core';
 import {ChildComponent} from '../child/child.component';
 
 ttransform(ChildComponent);
@@ -19,13 +19,18 @@ describe('ParentComponent', () => {
     .compileComponents();
   });
 
-  beforeEach(() => {
+  /*
+  it('', () => {
+    const instance = Ttransformer.getInstance<ChildComponent>(ChildComponent);
+    expect(true).toBe(true);
+  });
+   */
+
+  it('should create', () => {
     fixture = TestBed.createComponent(ParentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
 
-  it('should create', () => {
     const instance = Ttransformer.getInstance<ChildComponent>(ChildComponent);
 
     expect(instance?.test).toBe('test');

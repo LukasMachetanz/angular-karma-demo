@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-child',
@@ -13,5 +13,4 @@ export class ChildComponent {
   constructor() { }
 
   greetMe(): void {}
-
 }
