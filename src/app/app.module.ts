@@ -10,7 +10,7 @@ import { ChildComponent } from './child/child.component';
   declarations: [
     AppComponent,
     ParentComponent,
-    ChildComponent
+    ChildComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,12 @@
     "outDir": "./out-tsc/spec",
     "types": [
       "jasmine"
+    ],
+    /*
+    "plugins": [
+      { "transform": "@ttransformer/before-angular" } // "transformProgram": true
     ]
+    */
   },
   "files": [
     "src/test.ts",

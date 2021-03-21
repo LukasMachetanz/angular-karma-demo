@@ -1,3 +1,4 @@
+/*
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ParentComponent } from './parent.component';
@@ -19,12 +20,10 @@ describe('ParentComponent', () => {
     .compileComponents();
   });
 
-  /*
   it('', () => {
     const instance = Ttransformer.getInstance<ChildComponent>(ChildComponent);
     expect(true).toBe(true);
   });
-   */
 
   it('should create', () => {
     fixture = TestBed.createComponent(ParentComponent);
@@ -42,3 +41,4 @@ describe('ParentComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+*/

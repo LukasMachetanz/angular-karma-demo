@@ -1,42 +1,72 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ChildComponent} from '../child/child.component';
+import {Ttransformer} from '@ttransformer/core';
 
-// tslint:disable-next-line:typedef
 export function TestDoublee() {
   return (OriginalComponent: any) => {
 
+    const originalComponentCopy = { ...OriginalComponent };
+
+    Object.defineProperty(OriginalComponent, 'ctorParameters', {
+      get(): any {
+        if (Ttransformer.isInTransformContext()) {
+          return () => [];
+        } else {
+          return originalComponentCopy.ctorParameters;
+        }
+      }
+    });
+
+    const originalComponentDefinition = { ... OriginalComponent.ɵcmp };
+    const testDoubleComponentDefinition = { ...OriginalComponent.ɵcmp };
+
+    testDoubleComponentDefinition.template = (rf: any, ctx: any) => {
+      if (!Ttransformer.isInTransformContext()) {
+        originalComponentDefinition.template(rf, ctx);
+      }
+    };
+
+    Object.defineProperty(OriginalComponent, 'ɵcmp', {
+      get(): any {
+        if (Ttransformer.isInTransformContext()) {
+          return testDoubleComponentDefinition;
+        } else {
+          return originalComponentDefinition;
+        }
+      },
+    });
+
     /*
-    console.dir(OriginalComponent);
+    const propertyNames = Object.getOwnPropertyNames(OriginalComponent.prototype).filter((propertyName) => {
+      return propertyName !== 'constructor';
+    });
+    console.log(propertyNames);
+    const spyObj: any = jasmine.createSpyObj(OriginalComponent, propertyNames);
+
 
     Object.defineProperty(OriginalComponent, 'ɵfac', {
       get(): any {
         return () => {
-          console.log('#ɵfac');
-          return new OriginalComponent();
+          console.log("FAKE")
+          Ttransformer.register(OriginalComponent, spyObj);
+          return spyObj;
+          // return new OriginalComponent();
         };
+      }
+    });
+
+    const testDoubleComponentDefinition: any = { ...OriginalComponent.ɵcmp };
+    testDoubleComponentDefinition.template = () => {};
+
+    Object.defineProperty(OriginalComponent, 'ɵcmp', {
+      get(): any {
+        return testDoubleComponentDefinition;
       },
     });
      */
 
-
-
-    /*
-    Object.defineProperty(OriginalComponent, 'ɵfac', {
-      configurable: true,
-      writable: true,
-      value:  () => {
-        console.log("LOL");
-        return new OriginalComponent();
-      }
-    });
-     */
-
-    /*
-    OriginalComponent.ɵfac =  () => {
-      console.log("LOL");
-      return new OriginalComponent();
-    };
-     */
+    // console.dir(testDoubleComponentDefinition);
+    console.dir(OriginalComponent);
 
     return OriginalComponent;
   };
@@ -47,7 +77,6 @@ export function TestDoublee() {
   templateUrl: './parent.component.html',
   styleUrls: ['./parent.component.scss']
 })
-@TestDoublee()
 export class ParentComponent {
   @ViewChild(ChildComponent)
   public childComponent: ChildComponent | undefined;
